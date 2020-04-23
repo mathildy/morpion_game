@@ -1,4 +1,4 @@
-class Boardcase
+class Boardcase #créer et définir les positions possibles de X et O
 
   attr_accessor :position, :content 
 
