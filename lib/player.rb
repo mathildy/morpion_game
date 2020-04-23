@@ -1,9 +1,11 @@
-class Player 
-  attr_reader :name, :value
+class Player   
 
-  def initialize (name, value) #initialiser les noms des joueurs et les valeurs qu'ils peuvent rentrer (X ou O)
-    @name = name
-    @value = value #Value = X ou O
-  end 
-
+  attr_accessor :player_name, :value_x_o
+  attr_writer :a_gagne
+  
+  def initialize (player_name, value_x_o, a_gagne)  #TO DO : doit régler son nom, sa valeur, son état de victoire
+    @player_name = player_name
+    @value_x_o = value_x_o
+    @a_gagne = false
+  end
 end
