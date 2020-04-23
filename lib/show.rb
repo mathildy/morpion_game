@@ -1,6 +1,6 @@
 require "pry"
 class Show
-  def board
+  def start
     puts "   1   2  3"
     puts " a #{@A1.content} | #{@A2.content} | #{@A3.content}"
     puts "   ---------"
@@ -10,4 +10,3 @@ class Show
   end
 
 end
-

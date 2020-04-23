@@ -2,7 +2,7 @@ class Boardcase
 
   attr_accessor :position, :content 
 
-  def initialize 
+  def initialize(position, content = " ") 
     @position = position
     @content = content
   end

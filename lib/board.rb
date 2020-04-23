@@ -1,22 +1,23 @@
 require 'pry'
 class Board
 
-  attr_accessor :array_board, :game_state_variable, :game_nil_variable
+  attr_accessor :array_board#, :game_state_variable, :game_nil_variable
 
   def initialize
-    @A1 = Boardcase.new("A1",' ') 
-    @A2 = Boardcase.new("A2",' ')
-    @A3 = Boardcase.new("A3",' ')
-    @B1 = Boardcase.new("B1",' ')
-    @B2 = Boardcase.new("B2",' ')
-    @B3 = Boardcase.new("B3",' ')
-    @C1 = Boardcase.new("C1",' ')
-    @C2 = Boardcase.new("C2",' ')
-    @C3 = Boardcase.new("C3",' ')
+    #@players = [Player.new(player_1, "X"), Player.new(player_2, "O")]
+    @A1 = Boardcase.new("A1") 
+    @A2 = Boardcase.new("A2")
+    @A3 = Boardcase.new("A3")
+    @B1 = Boardcase.new("B1")
+    @B2 = Boardcase.new("B2")
+    @B3 = Boardcase.new("B3")
+    @C1 = Boardcase.new("C1")
+    @C2 = Boardcase.new("C2")
+    @C3 = Boardcase.new("C3")
+    
+    #@game_state_variable = false
 
-    @game_state_variable = false
-
-    @game_nil_variable = false
+    #@game_nil_variable = false
 
     array_board = [@A1, @A2, @A3, @B1, @B2, @B3, @C1, @C2, @C3] 
 
@@ -76,7 +77,6 @@ class Board
   end 
   
    
- binding.pry
 
 
 end 
