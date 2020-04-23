@@ -21,7 +21,3 @@ gaming = Game.new(player_1, player_2)
 
 gaming.start 
 
-
-#while ??
-
-#end
