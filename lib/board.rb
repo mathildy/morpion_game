@@ -3,7 +3,7 @@ class Board
 
   attr_accessor :array_board#, :game_state_variable, :game_nil_variable
 
-  def initialize
+  def initialize #permet de créer les 9 instances du tableau
     #@players = [Player.new(player_1, "X"), Player.new(player_2, "O")]
     @A1 = Boardcase.new("A1") 
     @A2 = Boardcase.new("A2")
@@ -23,7 +23,7 @@ class Board
 
   end
 
-  def play_turn(case_choose, value)
+  def play_turn(case_choose, value) 
     #1) demande au bon joueur ce qu'il souhaite faire
     puts "Quelle case souhaites-tu cocher ? "
     print ">"
@@ -34,7 +34,7 @@ class Board
     array_board.map { |item| item.position == case_choose ? item.content = value  : item }
   end  
 
-  def victory? 
+  def victory? #prévoit toutes les possibilités où l'un des 2 joueurs peut gagner la partie
     if @A1.content == "o" && @A2.content == "o" && @A3.content == "o" || @A1.content == "x" && @A2.content == "x" && @A3.content == "x"
       @game_state_variable = true
      end
