@@ -1,84 +1,54 @@
-require 'pry'
 class Board
+  include Enumerable #TO DO : la classe a 1 attr_accessor, une array qui contient les BoardCases
+  attr_accessor :board
 
-  attr_accessor :array_board#, :game_state_variable, :game_nil_variable
+  def initialize    #TO DO :    #Quand la classe s'initialize, elle doit créer 9 instances BoardCases
+                                #Ces instances sont rangées dans une array qui est l'attr_accessor de la classe
+    @A1 = BoardCase.new    @A1 = 0
+    @A2 = BoardCase.new    @A2 = 1
+    @A3 = BoardCase.new    @A3 = 2    
+    @B1 = BoardCase.new    @B1 = 3     
+    @B2 = BoardCase.new    @B2 = 4     
+    @B3 = BoardCase.new    @B3 = 5
+    @C1 = BoardCase.new    @C1 = 6    
+    @C2 = BoardCase.new    @C2 = 7     
+    @C3 = BoardCase.new    @C3 = 8
 
-  def initialize #permet de créer les 9 instances du tableau
-    #@players = [Player.new(player_1, "X"), Player.new(player_2, "O")]
-    @A1 = Boardcase.new("A1") 
-    @A2 = Boardcase.new("A2")
-    @A3 = Boardcase.new("A3")
-    @B1 = Boardcase.new("B1")
-    @B2 = Boardcase.new("B2")
-    @B3 = Boardcase.new("B3")
-    @C1 = Boardcase.new("C1")
-    @C2 = Boardcase.new("C2")
-    @C3 = Boardcase.new("C3")
-    
-    #@game_state_variable = false
-
-    #@game_nil_variable = false
-
-    array_board = [@A1, @A2, @A3, @B1, @B2, @B3, @C1, @C2, @C3] 
+    # @board = [ @A1.to_s , @A2.to_s  , @A3.to_s  , @B1.to_s  , @B2.to_s  , @B3.to_s  , @C1.to_s  , @C2.to_s  , @C3.to_s  ]
+    @board = [ @A1 , @A2 ,@A3 ,@B1 ,@B2 ,@B3 ,@C1 ,@C2 ,@C3 ]
 
   end
 
-  def play_turn(case_choose, value) 
-    #1) demande au bon joueur ce qu'il souhaite faire
-    puts "Quelle case souhaites-tu cocher ? "
-    print ">"
-    case_choose = gets.chomp
+  def to_s   #TO DO : afficher le plateau
+    puts " #{board[0]} | #{board[1]} | #{board[2]} "
+    puts " #{board[3]} | #{board[4]} | #{board[5]} "
+    puts " #{board[6]} | #{board[7]} | #{board[8]} "
+  end
 
-    #2) change la BoardCase jouée en fonction de la valeur du joueur (X ou O)
-    #joueur
-    array_board.map { |item| item.position == case_choose ? item.content = value  : item }
-  end  
+  def play(player, value_x_o)   #TO DO : une méthode qui change la BoardCase jouée en fonction de la valeur du joueur (X, ou O)
+    puts "#{player.player_name} choisis ta case entre 0 et 8 "
+    case_number = gets.chomp.to_i
+    if  @board[case_number]  != "X" && @board[case_number] != "O" 
+        @board[case_number] = value_x_o
 
-  def victory? #prévoit toutes les possibilités où l'un des 2 joueurs peut gagner la partie
-    if @A1.content == "o" && @A2.content == "o" && @A3.content == "o" || @A1.content == "x" && @A2.content == "x" && @A3.content == "x"
-      @game_state_variable = true
+    else puts "la case est déjà prise, joue une case vide"
+
+    end
+  end
+
+  def victory  #TO DO : qui gagne ?
+    if @board[0] == @board[1] && @board[1] == @board[2] ||
+       @board[3] == @board[4] && @board[4] == @board[5] ||
+       @board[6] == @board[7] && @board[7] == @board[8] ||
+       @board[0] == @board[3] && @board[3] == @board[6] ||
+       @board[1] == @board[4] && @board[4] == @board[7] ||
+       @board[2] == @board[5] && @board[5] == @board[8] ||
+       @board[0] == @board[4] && @board[4] == @board[8] ||
+       @board[2] == @board[4] && @board[4] == @board[6] 
+        true
+    else
+      false
      end
- 
-     # On test la 2ème ligne
-     if @B1.content == "o" && @B2.content == "o" && @B3.content == "o" || @B1.content == "x" && @B2.content == "x" && @B3.content == "x"
-      @game_state_variable = true
-     end
- 
-     # On test la 3eme ligne
-     if @C1.content == "o" && @C2.content == "o" && @C3.content == "o" || @C1.content == "x" && @C2.content == "x" && @C3.content == "x"
-     @game_state_variable = true
-     end
- 
-     # On test la première colone
-     if @A1.content == "o" && @B1.content == "o" && @C1.content == "o" || @A1.content == "x" && @B1.content == "x" && @C1.content == "x"
-      @game_state_variable = true
-     end
- 
-     # On test le deuxième colone
-     if @A2.content == "o" && @B2.content == "o" && @C2.content == "o" || @A2.content == "x" && @B2.content == "x" && @C2.content == "x"
-      @game_state_variable = true
-     end
- 
-     # On test la 3eme colone
-     if @A3.content == "o" && @B3.content == "o" && @C3.content == "o" || @A3.content == "x" && @B3.content == "x" && @C3.content == "x"
-      @game_state_variable = true
-     end
- 
-     # On test la dagonale gauche
-     if @A1.content == "o" && @B2.content == "o" && @C3.content == "o" || @A1.content == "x" && @B2.content == "x" && @C3.content == "x"
-      @game_state_variable = true
-     end
- 
-     # On test la diagonle droite
-     if @A3.content == "o" && @B2.content == "o" && @C1.content == "o" || @A3.content == "x" && @B2.content == "x" && @C1.content == "x"
-      @game_state_variable = true
-     end
- 
-  end 
+  end
   
-   
-
-
-end 
-
-
+end
